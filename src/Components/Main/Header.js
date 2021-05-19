@@ -7,7 +7,6 @@ export default function Header(){
     const {userInfo} = useContext(UserContext);
 
     return (
-        
         <Wrapper>
             <img src={logoHeader} alt="logo"></img>
             <UserImage src={userInfo.image} alt="User Image"></UserImage>

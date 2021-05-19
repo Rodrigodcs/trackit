@@ -1,24 +1,29 @@
 import styled from "styled-components";
 import trash from "./Assets/trash.svg"
 
-export default function Habit({habit}){
+export default function Habit({habit,deleteHabit}){
 
-   
-    
     const weekdays = ["D","S","T","Q","Q","S","S"]
+
+    function removeHabit(){
+        if(window.confirm("Tem certeza que deseja excluir esse hábito?")){
+            deleteHabit(habit)
+        }
+    }
+
     return ( 
         <Wrapper>
             <p>{habit.name}</p>
             <Weekdays>
                 {weekdays.map((d,index)=>{
                     if(habit.days.find(element=>element===index)!==undefined){
-                        return <Days selected>{d}</Days>
+                        return <Days selected key={index}>{d}</Days>
                     }else{ 
-                        return <Days>{d}</Days>
+                        return <Days key={index}>{d}</Days>
                     }
                 })}
             </Weekdays>
-            <img src={trash}></img>
+            <img src={trash} alt="trash icon" onClick={()=> removeHabit()}/>
         </Wrapper>
     )
 }

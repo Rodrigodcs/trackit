@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import {useContext} from "react"
-import UserContext from "../Contexts/UserContext"
+//import {useContext} from "react"
+//import UserContext from "../Contexts/UserContext"
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 export default function Header(){
-    const {userInfo} = useContext(UserContext);
+    //const {userInfo} = useContext(UserContext);
     const percentage = 1;
     return (
         
