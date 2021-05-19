@@ -4,8 +4,12 @@ import {Link, useHistory} from "react-router-dom"
 import {useState} from "react"
 import axios from "axios"
 import Loader from "react-loader-spinner";
+import {useContext} from "react"
+import UserContext from "../Contexts/UserContext"
+
 
 export default function Login(){
+    const {setUserInfo } = useContext(UserContext);
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [loading,setLoading]=useState(false)
@@ -20,6 +24,7 @@ export default function Login(){
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",user)
         request.then(r=> {
             console.log(r)
+            setUserInfo(r.data)
             history.push("/habitos")
         })
         request.catch(r=> {
@@ -45,7 +50,7 @@ export default function Login(){
                 </Button>:
                 <Button onClick={()=>logIn()}><>Entrar</></Button>
             }
-            <Link to="/register">
+            <Link to="/cadastro">
                 <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
             

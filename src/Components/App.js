@@ -1,15 +1,19 @@
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Main from "./Login/Login"
 import Register from "./Login/Register"
-import Habits from "./Main/Habits"
+import HabitsScreen from "./Main/HabitsScreen"
 import Today from "./Main/Today"
 import Historic from "./Main/Historic"
 import {GlobalStyle} from "./GlobalStyle"
-import {createContext} from "react"
+import UserContext from "./Contexts/UserContext"
+import {useState} from "react"
 
 export default function App(){
+    const [userInfo, setUserInfo]=useState("")
+
     return (
-        <>
+     
+        <UserContext.Provider value={{userInfo, setUserInfo}}>
             <GlobalStyle/>
             <Router>
                 <Switch>
@@ -20,7 +24,7 @@ export default function App(){
                         <Register/>
                     </Route>
                     <Route path="/habitos" exact>
-                        <Habits/>
+                        <HabitsScreen/>
                     </Route>
                     <Route path="/hoje" exact>
                         <Today/>
@@ -30,6 +34,6 @@ export default function App(){
                     </Route>
                 </Switch>
             </Router>
-        </>
+        </UserContext.Provider>
     )
 }

@@ -1,17 +1,19 @@
 import styled from "styled-components";
 import logoHeader from "./Assets/headerLogo.svg"
+import {useContext} from "react"
+import UserContext from "../Contexts/UserContext"
 
 export default function Header(){
+    const {userInfo} = useContext(UserContext);
+
     return (
+        
         <Wrapper>
-            <img src={logoHeader}></img>
-            <img src={logoHeader}></img>
+            <img src={logoHeader} alt="logo"></img>
+            <UserImage src={userInfo.image} alt="User Image"></UserImage>
         </Wrapper>
     )
-
 }
-
-
 
 export const Wrapper = styled.section`
     position:fixed;
@@ -31,5 +33,7 @@ export const Wrapper = styled.section`
 
 
 export const UserImage = styled.img`
-   
+   width:50px;
+   height:50px;
+   border-radius:50%;
 `;
