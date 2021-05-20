@@ -8,11 +8,30 @@ import UserContext from "../Contexts/UserContext"
 import TodayContext from "../Contexts/TodayContext"
 import styled from "styled-components";
 
+//dayjs
+import dayjs from "dayjs";
+
+// Locales
+import "dayjs/locale/pt";
+import localeDe from "dayjs/locale/de"; // With a custom alias for the locale object
+
+// Plugins
+import advancedFormat from "dayjs/plugin/advancedFormat";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import relativeTime from "dayjs/plugin/relativeTime";
+import calendar from "dayjs/plugin/calendar";
+
+// Load plugins
+dayjs.extend(advancedFormat);
+dayjs.extend(localizedFormat);
+dayjs.extend(relativeTime);
+dayjs.extend(calendar);
+
 export default function Today(){
     const {setTodayTasks} = useContext(TodayContext);
     const {todayTasks} = useContext(TodayContext);
     const {userInfo} = useContext(UserContext);
-    const [userHabits,setUserHabits]= useState([])
+    const [userHabits,setUserHabits]= useState([]) 
 
     useEffect(() => {
         const config={
@@ -83,11 +102,6 @@ export default function Today(){
         }) 
     }
 
-    const dayjs = require('dayjs');
-    console.log(dayjs())
-    let now = dayjs();
-    console.log(now.format());
-
     const percentage = (100/todayTasks.length) * todayTasks.filter(d=>d.done).length
     return (
         <>
@@ -95,7 +109,7 @@ export default function Today(){
             <Wrapper>
 
                 <TodayInfo>
-                    <TodayDate>Segunda, 17/05</TodayDate>
+                    <TodayDate>{dayjs().locale("pt").format("dddd")}, {dayjs().format("DD/MM")}</TodayDate>
                     {percentage===0?
                         <TodayPercentage>Nenhum hábito concluído ainda</TodayPercentage>:
                         <TodayPercentage someDone>{percentage.toFixed(0)}% dos hábitos concluídos</TodayPercentage>
