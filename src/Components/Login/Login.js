@@ -25,7 +25,7 @@ export default function Login(){
         request.then(r=> {
             console.log(r)
             setUserInfo(r.data)
-            history.push("/habitos")
+            history.push("/hoje")
         })
         request.catch(r=> {
             console.log(r)

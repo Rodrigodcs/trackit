@@ -61,20 +61,6 @@ export const Weekdays = styled.section`
     width:100%;
     height:30px;
     background: white;
-    div{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        width:30px;
-        height:30px;
-        font-size: 19.976px;
-        line-height: 25px;
-        border: 1px solid #D5D5D5;
-        box-sizing: border-box;
-        border-radius: 5px;
-        color:${props => props.selected ? "white" : "#DBDBDB" };
-        background-color:${props => props.selected ? "#DBDBDB" : "white" };
-    }
 `;
 export const Days = styled.section`
     display:flex;
@@ -87,6 +73,6 @@ export const Days = styled.section`
     border: 1px solid #D5D5D5;
     box-sizing: border-box;
     border-radius: 5px;
-    color:${props => props.selected ? "white" : "#DBDBDB" };
-    background-color:${props => props.selected ? "#DBDBDB" : "white" };
+    color:${props => props.selected ? "white" : "#CFCFCF" };
+    background-color:${props => props.selected ? "#CFCFCF" : "white" };
 `;

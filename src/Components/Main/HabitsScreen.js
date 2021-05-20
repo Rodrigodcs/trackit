@@ -13,9 +13,9 @@ export default function HabitsScreen(){
     const {userInfo} = useContext(UserContext);
     const [userHabits,setUserHabits] = useState([])
     const [creationWindow,setCreationWindow] = useState(false)
+    const [newHabit,setNewHabit] = useState({name:"",days:[]})
 
     useEffect(() => {
-        console.log(userInfo.token)
         const config={
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
@@ -70,14 +70,17 @@ export default function HabitsScreen(){
     }
 
     function createHabit(habit){
+
         const config={
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
             }
         }
-        const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",habit,config);
+        const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",newHabit,config);
         promisse.then(r => {
 			console.log(r)
+            setNewHabit({name:"",days:[]})
+            reRenderHabits()
 		});
         promisse.catch(e =>{
             alert("Ocorreu um erro inesperado")
@@ -93,7 +96,7 @@ export default function HabitsScreen(){
                 <button onClick={()=>displayCreationWindow(true)}>+</button>
             </Create>
             {creationWindow?
-                <CreateHabitWindow hide={displayCreationWindow} create={createHabit}/>:
+                <CreateHabitWindow hide={displayCreationWindow} create={createHabit} changeHabit={setNewHabit} currentHabit={newHabit}/>:
                 <p></p>
             }
             {userHabits.length===0?
@@ -112,16 +115,7 @@ export const Wrapper = styled.section`
     min-height:100vh;
     background-color: #F2F2F2;
     padding:90px 18px;
-    p{
-        font-size: 17.976px;
-        line-height: 22px;
-        color: #666666;
-    }
-    button{
-        width:300px;
-        height:300px;
-        background-color:red;
-    }
+    
 `;
 
 export const Create = styled.section`

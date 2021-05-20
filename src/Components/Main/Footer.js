@@ -1,33 +1,38 @@
 import styled from "styled-components";
-//import {useContext} from "react"
-//import UserContext from "../Contexts/UserContext"
+import {Link} from "react-router-dom"
+import {useContext} from "react"
+import TodayContext from "../Contexts/TodayContext"
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 export default function Header(){
-    //const {userInfo} = useContext(UserContext);
-    const percentage = 1;
+    const {todayTasks} = useContext(TodayContext);
+    const percentage = (100/todayTasks.length) * todayTasks.filter(d=>d.done).length
     return (
         
         <Wrapper>
-            <p>Hábitos</p>
-            <ButtonWrapper>
-                <CircularProgressbar
-                    value={percentage}
-                    text={`${percentage}%`}
-                    background
-                    backgroundPadding={6}
-                    styles={buildStyles({
-                    backgroundColor: "#3e98c7",
-                    textColor: "#fff",
-                    pathColor: "#fff",
-                    trailColor: "transparent"
-                    })}
-                />
-                <div>Hoje</div>
-            </ButtonWrapper>
-            
-            <p>Histórico</p>
+            <Link to="/habitos" style={{ textDecoration: 'none' }}>
+                <p>Hábitos</p>
+            </Link>
+            <Link to="/hoje">
+                <ButtonWrapper>
+                    <CircularProgressbar
+                        value={percentage}
+                        text={`Hoje`}
+                        background
+                        backgroundPadding={6}
+                        styles={buildStyles({
+                        backgroundColor: "#3e98c7",
+                        textColor: "#fff",
+                        pathColor: "#fff",
+                        trailColor: "transparent"
+                        })}
+                    />
+                </ButtonWrapper>
+            </Link>
+            <Link to="/historico" style={{ textDecoration: 'none' }}>
+                <p>Histórico</p>
+            </Link>
         </Wrapper>
     )
 }
