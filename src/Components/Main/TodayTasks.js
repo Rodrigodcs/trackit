@@ -1,10 +1,5 @@
-import {useState, useEffect} from 'react';
 import checkMark from "./Assets/check.svg"
-import axios from "axios"
-import {useContext} from "react"
-import UserContext from "../Contexts/UserContext"
 import styled from "styled-components";
-import CreateHabitWindow from "./CreateHabitWindow"
 
 export default function TodayTasks({habit,check,unCheck}){
 
@@ -29,8 +24,8 @@ export default function TodayTasks({habit,check,unCheck}){
                 </Streak>
             </Info>
             {habit.done?
-                <Check checked onClick={()=>unCheck(habit)}><img src={checkMark}></img></Check>:
-                <Check onClick={()=>check(habit)}><img src={checkMark}></img></Check>
+                <Check checked onClick={()=>unCheck(habit)}><img src={checkMark} alt="check mark"></img></Check>:
+                <Check onClick={()=>check(habit)}><img src={checkMark} alt="check mark"></img></Check>
             }
         </Wrapper>
         

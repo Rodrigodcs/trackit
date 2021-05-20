@@ -7,7 +7,6 @@ import {useContext} from "react"
 import UserContext from "../Contexts/UserContext"
 import TodayContext from "../Contexts/TodayContext"
 import styled from "styled-components";
-import CreateHabitWindow from "./CreateHabitWindow"
 
 export default function Today(){
     const {setTodayTasks} = useContext(TodayContext);
@@ -30,7 +29,7 @@ export default function Today(){
         request.catch(e =>{
             alert("Ocorreu um erro inesperado")
         }) 
-	}, [userInfo.token]);
+	}, [userInfo.token,setTodayTasks]);
 
     function reRenderHabits(){
         const config={
