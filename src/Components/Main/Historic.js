@@ -22,10 +22,7 @@ export default function Historic(){
         }
 		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/history/daily",config);
 		request.then(r => {
-			console.log(r.data)
-            const x=r.data.map(h=> { return {day:h.day,completed:h.habits.reduce((a,b)=> a&&b.done,true)}})
             setHabitsHistory(r.data.map(h=> { return {day:h.day,completed:h.habits.reduce((a,b)=> a&&b.done,true)}}))
-            console.log(x)
 		})
         request.catch(e =>{
             alert("Ocorreu um erro inesperado")

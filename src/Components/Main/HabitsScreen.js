@@ -15,6 +15,8 @@ export default function HabitsScreen(){
     const [creationWindow,setCreationWindow] = useState(false)
     const [newHabit,setNewHabit] = useState({name:"",days:[]})
     const [saving,setSaving]=useState(false)
+    const [habit,setHabit]=useState("")
+    const [days,setDays]=useState([])
 
     useEffect(() => {
         const config={
@@ -24,7 +26,6 @@ export default function HabitsScreen(){
         }
 		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",config);
 		request.then(r => {
-			console.log(r)
             setUserHabits(r.data)
 		});
         request.catch(e =>{
@@ -40,7 +41,6 @@ export default function HabitsScreen(){
         }
 		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",config);
 		request.then(r => {
-			console.log(r)
             setUserHabits(r.data)
 		});
         request.catch(e =>{
@@ -49,8 +49,6 @@ export default function HabitsScreen(){
     }
 
     function deleteHabit(habit){
-        console.log(habit)
-
         const config={
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
@@ -58,7 +56,6 @@ export default function HabitsScreen(){
         }
 		const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}`,config);
 		request.then(r => {
-			console.log(r)
             reRenderHabits()
 		});
         request.catch(e =>{
@@ -70,7 +67,7 @@ export default function HabitsScreen(){
         setCreationWindow(display)
     }
 
-    function createHabit(habit){
+    function createHabit(){
         setSaving(true)
         const config={
             headers:{
@@ -79,10 +76,11 @@ export default function HabitsScreen(){
         }
         const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",newHabit,config);
         promisse.then(r => {
-			console.log(r)
             setNewHabit({name:"",days:[]})
             reRenderHabits()
             setSaving(false)
+            setHabit("")
+            setDays([])
 		});
         promisse.catch(e =>{
             alert("Ocorreu um erro inesperado")
@@ -99,7 +97,18 @@ export default function HabitsScreen(){
                 <button onClick={()=>displayCreationWindow(true)}>+</button>
             </Create>
             {creationWindow?
-                <CreateHabitWindow hide={displayCreationWindow} create={createHabit} changeHabit={setNewHabit} currentHabit={newHabit} saving={saving}/>:
+                <CreateHabitWindow 
+                    hide={displayCreationWindow} 
+                    create={createHabit} 
+                    changeHabit={setNewHabit} 
+                    currentHabit={newHabit} 
+                    saving={saving}
+                    habit={habit}
+                    setHabit={setHabit}
+                    days={days}
+                    setDays={setDays}
+                    />:
+                    
                 <p></p>
             }
             {userHabits.length===0?

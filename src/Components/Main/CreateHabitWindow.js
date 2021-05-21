@@ -1,13 +1,7 @@
-import {useState} from "react"
 import styled from "styled-components";
 import Loader from "react-loader-spinner";
 
-export default function CreateHabitWindow({hide,create,changeHabit,currentHabit,saving}){
-
-    const [habit,setHabit]=useState(currentHabit.name)
-    const [days,setDays]=useState(currentHabit.days)
-    
-    console.log(habit)
+export default function CreateHabitWindow({hide,create,changeHabit,currentHabit,saving,habit,setHabit,days,setDays}){
 
     function changeInput(e){
         setHabit(e.target.value)
@@ -32,9 +26,6 @@ export default function CreateHabitWindow({hide,create,changeHabit,currentHabit,
     function creatingHabit(){
         create({name:habit,days:days})
     }
-
-    console.log("array")
-    console.log(days)
 
     const weekdaysLabel = ["D","S","T","Q","Q","S","S"]
     return (

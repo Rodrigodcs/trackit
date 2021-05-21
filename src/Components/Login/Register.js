@@ -15,7 +15,6 @@ export default function Register(){
 
     function sendRegistration(){
         setLoading(true)
-        console.log("ASS")
         const registrationRequest = {
             email,
             name,
@@ -24,11 +23,9 @@ export default function Register(){
         }
         const request= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up",registrationRequest)
         request.then(r=> {
-            console.log(r)
             history.goBack()
         })
         request.catch(r=> {
-            console.log(r)
             setLoading(false)
             alert("Não foi possivel realizar o cadastro!")
         })

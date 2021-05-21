@@ -23,7 +23,6 @@ export default function Today(){
         }
 		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",config);
 		request.then(r => {
-			console.log(r)
             setUserHabits(r.data)
             setTodayTasks(r.data)
 		});
@@ -40,7 +39,6 @@ export default function Today(){
         }
 		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",config);
 		request.then(r => {
-			console.log(r)
             setUserHabits(r.data)
             setTodayTasks(r.data)
 		});
@@ -50,16 +48,13 @@ export default function Today(){
     }
 
     function checkHabit(habit){
-        console.log(habit)
         const config={
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
             }
         }
-        console.log(config)
 		const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`,{},config);
 		request.then(r => {
-			console.log(r)
             reRenderHabits()
 		});
         request.catch(e =>{
@@ -67,8 +62,6 @@ export default function Today(){
         }) 
     }
     function unCheckHabit(habit){
-        console.log(habit)
-
         const config={
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
@@ -76,7 +69,6 @@ export default function Today(){
         }
 		const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`,{},config);
 		request.then(r => {
-			console.log(r)
             reRenderHabits()
 		});
         request.catch(e =>{

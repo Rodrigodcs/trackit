@@ -1,9 +1,20 @@
 import checkMark from "./Assets/check.svg"
 import styled from "styled-components";
+import {useState} from 'react';
 
 export default function TodayTasks({habit,check,unCheck}){
+    const [checked,setChecked] = useState(habit.done)
 
-    
+    function tryCheck(habit){
+        setChecked(true)
+        check(habit)
+    }
+
+    function tryUnCheck(habit){
+        setChecked(false)
+        unCheck(habit)
+    }
+
     return (
         <Wrapper>
             <Info>
@@ -23,15 +34,13 @@ export default function TodayTasks({habit,check,unCheck}){
                     </p>
                 </Streak>
             </Info>
-            {habit.done?
-                <Check checked onClick={()=>unCheck(habit)}><img src={checkMark} alt="check mark"></img></Check>:
-                <Check onClick={()=>check(habit)}><img src={checkMark} alt="check mark"></img></Check>
+            {checked?
+                <Check checked onClick={()=>tryUnCheck(habit)}><img src={checkMark} alt="check mark"></img></Check>:
+                <Check onClick={()=>tryCheck(habit)}><img src={checkMark} alt="check mark"></img></Check>
             }
         </Wrapper>
-        
     )
 }
-
 
 export const Wrapper = styled.section`
     display:flex;
