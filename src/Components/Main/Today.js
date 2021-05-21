@@ -7,25 +7,7 @@ import {useContext} from "react"
 import UserContext from "../Contexts/UserContext"
 import TodayContext from "../Contexts/TodayContext"
 import styled from "styled-components";
-
-//dayjs
 import dayjs from "dayjs";
-
-// Locales
-import "dayjs/locale/pt";
-import localeDe from "dayjs/locale/de"; // With a custom alias for the locale object
-
-// Plugins
-import advancedFormat from "dayjs/plugin/advancedFormat";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-import relativeTime from "dayjs/plugin/relativeTime";
-import calendar from "dayjs/plugin/calendar";
-
-// Load plugins
-dayjs.extend(advancedFormat);
-dayjs.extend(localizedFormat);
-dayjs.extend(relativeTime);
-dayjs.extend(calendar);
 
 export default function Today(){
     const {setTodayTasks} = useContext(TodayContext);

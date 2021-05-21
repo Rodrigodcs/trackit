@@ -14,6 +14,7 @@ export default function HabitsScreen(){
     const [userHabits,setUserHabits] = useState([])
     const [creationWindow,setCreationWindow] = useState(false)
     const [newHabit,setNewHabit] = useState({name:"",days:[]})
+    const [saving,setSaving]=useState(false)
 
     useEffect(() => {
         const config={
@@ -70,7 +71,7 @@ export default function HabitsScreen(){
     }
 
     function createHabit(habit){
-
+        setSaving(true)
         const config={
             headers:{
                 Authorization:`Bearer ${userInfo.token}`
@@ -81,9 +82,11 @@ export default function HabitsScreen(){
 			console.log(r)
             setNewHabit({name:"",days:[]})
             reRenderHabits()
+            setSaving(false)
 		});
         promisse.catch(e =>{
             alert("Ocorreu um erro inesperado")
+            setSaving(false)
         })
     }
    
@@ -96,7 +99,7 @@ export default function HabitsScreen(){
                 <button onClick={()=>displayCreationWindow(true)}>+</button>
             </Create>
             {creationWindow?
-                <CreateHabitWindow hide={displayCreationWindow} create={createHabit} changeHabit={setNewHabit} currentHabit={newHabit}/>:
+                <CreateHabitWindow hide={displayCreationWindow} create={createHabit} changeHabit={setNewHabit} currentHabit={newHabit} saving={saving}/>:
                 <p></p>
             }
             {userHabits.length===0?
@@ -108,6 +111,7 @@ export default function HabitsScreen(){
         </>
     )
 }
+
 
 export const Wrapper = styled.section`
     margin:0 auto;
@@ -139,5 +143,6 @@ export const Create = styled.section`
         line-height: 34px;
         text-align: center;
         color: #FFFFFF;
+        padding-bottom: 1px;
     }
 `;

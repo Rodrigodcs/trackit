@@ -71,7 +71,7 @@ export const Days = styled.section`
     font-size: 19.976px;
     line-height: 25px;
     border: 1px solid #D5D5D5;
-    box-sizing: border-box;
+    box-sizing: border-box; 
     border-radius: 5px;
     color:${props => props.selected ? "white" : "#CFCFCF" };
     background-color:${props => props.selected ? "#CFCFCF" : "white" };

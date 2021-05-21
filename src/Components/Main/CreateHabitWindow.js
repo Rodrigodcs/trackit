@@ -1,10 +1,12 @@
 import {useState} from "react"
 import styled from "styled-components";
+import Loader from "react-loader-spinner";
 
-export default function CreateHabitWindow({hide,create,changeHabit,currentHabit}){
+export default function CreateHabitWindow({hide,create,changeHabit,currentHabit,saving}){
 
     const [habit,setHabit]=useState(currentHabit.name)
     const [days,setDays]=useState(currentHabit.days)
+    
     console.log(habit)
 
     function changeInput(e){
@@ -29,7 +31,6 @@ export default function CreateHabitWindow({hide,create,changeHabit,currentHabit}
 
     function creatingHabit(){
         create({name:habit,days:days})
-        hide()
     }
 
     console.log("array")
@@ -50,7 +51,17 @@ export default function CreateHabitWindow({hide,create,changeHabit,currentHabit}
             </Weekdays>
             <Save>
                 <p onClick={()=>hide()}>Cancelar</p>
-                <button onClick={()=>creatingHabit()}>Salvar</button>
+                {saving?   
+                    <Button disabled>
+                        <Loader
+                            type="ThreeDots"
+                            color="white"
+                            height={35}
+                            width={50}
+                        />
+                    </Button>:
+                    <Button onClick={()=>creatingHabit()}>Salvar</Button>
+                }
             </Save>
         </Wrapper>
     )
@@ -126,5 +137,16 @@ export const Save = styled.section`
         line-height: 20px;
         color: #52B6FF;
     }
-    
+`;
+
+export const Button = styled.button`
+    width: 84px;
+    height: 35px;
+    background: #52B6FF;
+    border-radius: 4.63636px;
+    font-size: 15.976px;
+    line-height: 20px;
+    color: #FFFFFF;
+    border:none;
+    opacity:${props => props.disabled===true ? "0.6" : "1" };
 `;

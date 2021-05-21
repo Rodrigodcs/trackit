@@ -1,7 +1,7 @@
 import { Wrapper, Input, Button } from "./LoginStyles";
 import logo from "./Assets/logo.svg"
 import {Link, useHistory} from "react-router-dom"
-import {useState} from "react"
+import {useState,useEffect} from "react"
 import axios from "axios"
 import Loader from "react-loader-spinner";
 import {useContext} from "react"
@@ -9,11 +9,18 @@ import UserContext from "../Contexts/UserContext"
 
 
 export default function Login(){
-    const {setUserInfo } = useContext(UserContext);
+    const {setUserInfo} = useContext(UserContext);
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [loading,setLoading]=useState(false)
     let history = useHistory();
+
+    useEffect(() => {
+        if(JSON.parse(localStorage.getItem('trackitUserKey'))!==null){
+            setUserInfo(JSON.parse(localStorage.getItem('trackitUserKey')))
+            history.push("/hoje")
+        }
+	}, [history,setUserInfo]);
     
     function logIn(){
         setLoading(true)
@@ -23,12 +30,12 @@ export default function Login(){
         }
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",user)
         request.then(r=> {
-            console.log(r)
             setUserInfo(r.data)
+            localStorage.setItem('trackitUserKey', JSON.stringify(r.data));
             history.push("/hoje")
+
         })
         request.catch(r=> {
-            console.log(r)
             setLoading(false)
             alert("Não foi possivel efetuar o login!")
         })

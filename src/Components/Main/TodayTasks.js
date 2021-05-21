@@ -71,7 +71,7 @@ export const Check = styled.button`
     border:none;
 `;
 
-export const DaysCounter = styled.p`
+export const DaysCounter = styled.span`
     display:inline;
     font-size: 12.976px;
     line-height: 16px;
